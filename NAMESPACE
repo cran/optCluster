@@ -1,0 +1,8 @@
+import(clValid, RankAggreg, methods, cluster, gplots, kohonen,
+	MBCluster.Seq)
+importFrom(mclust, Mclust)
+exportClasses(optCluster)
+exportMethods(getDataset, getClValid, methodRanks, scoreRanks, getRankAggreg, 
+	topMethod, measureNames, methodNames, clusterResults, valScores, 
+	optimalScores, print, show, summary)
+export(optCluster, repRankAggreg, valPlot, aggregPlot, optHeatmap)

@@ -1,0 +1,14 @@
+f0f9e8372654b2354e93926861878324 *DESCRIPTION
+988c085bdec4edf9d8969609decf1afe *NAMESPACE
+c8adc248b2462bc84c1082b4da2c8178 *R/optCluster-Classes.R
+1eeb07ca93d2d8369451fed6f20ac3d7 *R/optCluster-Functions.R
+b39341395c4a1a2660f5fe000e9a94dd *R/optCluster-Internal.R
+37bf5c28336f9686c825ddf86e19d343 *R/optCluster-Methods.R
+1fed6721d0d2ceb5f042f2639b9d2b7d *data/arabid.rda
+9379f67ca3157565a7ea37323956f695 *man/aggregPlot.Rd
+796f52c406a31c8db6fd240d55f61ae6 *man/arabid.Rd
+c5cd45484e5693933e42ba4b03da09ba *man/optCluster-class.Rd
+5213c702891a0f40a787c91f45c702b9 *man/optCluster.Rd
+f70a9376b979deac393babd5a3977d3f *man/optHeatmap.Rd
+fed338957b6c0d2b87d3de73cd2218cb *man/repRankAggreg.Rd
+c1731d7009d2d58ebb72031ddafef350 *man/valPlot.Rd
