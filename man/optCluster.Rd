@@ -33,7 +33,7 @@
   	in conjuction with the "all" option for the 'clMethods' argument.  If TRUE and 'clMethods' = "all", 
   	all of the clustering algorithms for count data are selected: "em.nbinom", "da.nbinom", "sa.nbinom", 
   	"em.poisson", "da.poisson", "sa.poisson".  If FALSE and 'clMethods' = "all", all of the relevant clustering 
-  	algorithms used with transformed data are selected: "agnes", "clara", "diana", "fanny", 
+  	algorithms used with continuous data are selected: "agnes", "clara", "diana", "fanny", 
   	"hierarchical", "kmeans", "model", "pam", "som", "sota".}  
    \item{validation}{A character vector providing the names of the types of validation measures to be used. The 
   	options of "internal", "stability", "biological", and "all" are available. Any number or combination 
@@ -71,7 +71,7 @@
   	  	\item{\bold{Clustering Algorithms:}}{A total of sixteen clustering algorithms are available for cluster analysis.
   	  	
   	  	\itemize{
-  	  	\item Ten clustering algorithms for transformed data are available through the internal function \code{clValid}: 
+  	  	\item Ten clustering algorithms for continuous data are available through the internal function \code{clValid}: 
   	  	"agnes", "clara", "diana", "fanny", "hierarchical", "kmeans", "model", "pam", "som", and "sota".
 
   		\item Six clustering algorithms for count data are available 
@@ -180,9 +180,10 @@
   BMC Bioinformatics, 10:62,
   \url{http://www.biomedcentral.com/1471-2105/10/62}.
 
-  Sekula, M. (2015).
-  optCluster: An R Package for Determining the Optimal Clustering Algorithm and Optimal Number of Clusters.
-  MS Thesis, University of Louisville.
+  Sekula, M. (2015). 
+  optCluster : An R package for Determining the Optimal Clustering Algorithm and Optimal Number of Clusters.
+  Electronic Theses and Dissertations. Paper 2147.
+  \url{http://ir.library.louisville.edu/etd/2147}
     
   Si, Y., Liu, P., Li, P., & Brutnell, T. (2014).
   Model-based clustering for RNA-seq data. 
@@ -212,7 +213,7 @@ See  \url{http://www.bioconductor.org} for instructions on installing these.
   For a description of the \code{RankAggreg} function, including all available arguments that can be 
   passed to it, see \code{\link{RankAggreg}} in the \pkg{RankAggreg} package. 
   
-  For details on the clustering algorithm functions for transformed data see 
+  For details on the clustering algorithm functions for continuous data see 
   \code{\link[cluster]{agnes}}, \code{\link[cluster]{clara}}, \code{\link[cluster]{diana}},
   \code{\link[cluster]{fanny}}, and \code{\link[cluster]{pam}} in package \pkg{cluster},
   \code{\link{hclust}} and \code{\link{kmeans}} in package \pkg{stats}, 
@@ -242,13 +243,13 @@ See  \url{http://www.bioconductor.org} for instructions on installing these.
 	count1 <- optCluster(arabid, 2:4, clMethods = "all", countData = TRUE)
 	summary(count1)
 	
-	## Analysis of Count Data using All Validation Measures
-	if(require("Biobase") && require("annotate") && require("GO.db") && 
+	 ## Analysis of Count Data using All Validation Measures
+	 if(require("Biobase") && require("annotate") && require("GO.db") && 
 		require("org.At.tair.db")){
-	count2 <- optCluster(arabid, 2:4, clMethods = "all", countData = TRUE, validation = "all", 
+	 count2 <- optCluster(arabid, 2:4, clMethods = "all", countData = TRUE, validation = "all", 
 					annotation = "org.At.tair.db")
-	summary(count2)	
-	}
+	 summary(count2)	
+	 }
 	
 	## Normalize Data with Respect to Library Size	
 	obj <- t(t(arabid)/colSums(arabid))
@@ -257,25 +258,25 @@ See  \url{http://www.bioconductor.org} for instructions on installing these.
 	norm1 <- optCluster(obj, 2:4, clMethods = "all")
 	summary(norm1)
 	
-	## Analysis of Normalized Data using All Validation Measures
-	if(require("Biobase") && require("annotate") && require("GO.db") && 
-		require("org.At.tair.db")){
-	norm2 <- optCluster(obj, 2:4, clMethods = "all", validation = "all", 
+	 ## Analysis of Normalized Data using All Validation Measures
+	 if(require("Biobase") && require("annotate") && require("GO.db") && 
+	 	require("org.At.tair.db")){
+	 norm2 <- optCluster(obj, 2:4, clMethods = "all", validation = "all", 
 					annotation = "org.At.tair.db")
-	summary(norm2)	
-	}
+	 summary(norm2)	
+	 }
 	
 	## Analysis with Only UPGMA using Internal and Stability Validation Measures
 	hier1 <- optCluster(obj, 2:10, clMethods = "hierarchical")
 	summary(hier1)
 	
-	## Analysis with Only UPGMA using All Validation Measures
-	if(require("Biobase") && require("annotate") && require("GO.db") && 
+ ## Analysis with Only UPGMA using All Validation Measures
+	 if(require("Biobase") && require("annotate") && require("GO.db") && 
 		require("org.At.tair.db")){
-	hier2 <- optCluster(obj, 2:10, clMethods = "hierarchical", validation = "all", 
+	 hier2 <- optCluster(obj, 2:10, clMethods = "hierarchical", validation = "all", 
 					annotation = "org.At.tair.db")
-	summary(hier2)	
-	}
+	 summary(hier2)	
+	 }
 	
 	}
 }

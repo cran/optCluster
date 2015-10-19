@@ -13,8 +13,7 @@
 optHeatmap(x, dendroClusters = TRUE, barClusters = TRUE, 
 			clusterColors = "rainbow", 
 			mapColors = colorRampPalette(c("green", "black", "red"))(256), 
-			Colv = FALSE, dendrogram = "row", scale = "row", 
-			density.info = "none", ...)
+			Colv = FALSE, dendrogram = "row", density.info = "none", ...)
 }
 
 
@@ -34,8 +33,6 @@ optHeatmap(x, dendroClusters = TRUE, barClusters = TRUE,
 	reordering.}
 	\item{dendrogram}{Character string specifying which dendrogram(s) to display. 
 		Options include: "none", "row", "column", "both".}
-	\item{scale}{Character string specifying which direction the values of the dataset 
-		should be centered and scaled.  Options include: "row", "column", "none".}
 	\item{density.info}{Character string specifying the type of plot to superimpose
 		on the color-key.  Options include: "none", "histogram", "density".}			
 	\item{\dots}{Additional plotting parameters from the \code{heatmap.2} function.}  
@@ -76,7 +73,7 @@ optHeatmap(x, dendroClusters = TRUE, barClusters = TRUE,
 	## Analysis with Only UPGMA using Internal and Stability Validation Measures
 	hier1 <- optCluster(obj, 2:10, clMethods = "hierarchical")
 	topMethod(hier1)
-	
+
 	## Create Default Heat Map Reordering Rows Only
 	optHeatmap(hier1)
 	
@@ -86,7 +83,7 @@ optHeatmap(x, dendroClusters = TRUE, barClusters = TRUE,
 	## Customized Heat Map Using heatmap.2 Arguments
 	optHeatmap(hier1, barClusters = FALSE, Colv = TRUE, dendrogram = "both", 
 	labRow = "", cexCol = 1.0, keysize = 1)
-	
+
 
 }
 

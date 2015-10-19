@@ -1,6 +1,11 @@
 import(clValid, RankAggreg, methods, cluster, gplots, kohonen,
 	MBCluster.Seq)
 importFrom(mclust, Mclust)
+importFrom(grDevices, colorRampPalette, dev.interactive, rainbow)
+importFrom(graphics, par)
+importFrom(stats, as.dendrogram, as.dist, cor, cutree,
+     dendrapply, dist, ftable)
+importFrom(utils, capture.output)
 exportClasses(optCluster)
 exportMethods(getDataset, getClValid, methodRanks, scoreRanks, getRankAggreg, 
 	topMethod, measureNames, methodNames, clusterResults, valScores, 

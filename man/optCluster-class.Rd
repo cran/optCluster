@@ -125,9 +125,10 @@
   BMC Bioinformatics, 10:62,
   \url{http://www.biomedcentral.com/1471-2105/10/62}.
   
-  Sekula, M. (2015).
-  optCluster: An R Package for Determining the Optimal Clustering Algorithm and Optimal Number of Clusters.
-  MS Thesis, University of Louisville.
+  Sekula, M. (2015). 
+  optCluster : An R package for Determining the Optimal Clustering Algorithm and Optimal Number of Clusters.
+  Electronic Theses and Dissertations. Paper 2147.
+  \url{http://ir.library.louisville.edu/etd/2147}
 }
 \author{Michael Sekula, Somnath Datta, Susmita Datta}
 

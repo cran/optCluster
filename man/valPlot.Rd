@@ -66,12 +66,13 @@ valPlot(x, measures = measureNames(x), legend = TRUE,
 	norm1 <- optCluster(obj, 2:4, clMethods = "all")
 	
 	## Plots of Internal and Stability Validation Measures
+	par(mfrow = c(4,2))
 	valPlot(norm1)
 	
 	## Plots of Internal Validation Measures in a Single Figure
 	par(mfrow = c(2,2))
 	valPlot(norm1, measure = c("Dunn", "Silhouette", "Connectivity"), legend = FALSE)
-	plot(2:4, valScores(norm1, "Dunn")[,,1], type="n", axes=F, xlab = "", ylab = "")
+	plot(2:4, valScores(norm1, "Dunn")[,,1], type="n", axes=FALSE, xlab = "", ylab = "")
 	legend("center", methodNames(norm1), col=1:9, lty=1:9, pch=paste(c(1:9)), 
 			cex=0.8)		
 	}

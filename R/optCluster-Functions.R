@@ -293,7 +293,7 @@ aggregPlot <- function(x, show.average = TRUE, show.legend = TRUE, colR = "red",
 ## Hierarchical Heat Map
 optHeatmap <- function(x, dendroClusters = TRUE, barClusters = TRUE, clusterColors = "rainbow",
 					mapColors = colorRampPalette(c("green", "black", "red"))(256), Colv = FALSE,
-					dendrogram = "row", scale = "row", density.info = "none", ...){
+					dendrogram = "row", density.info = "none", ...){
 			if(!requireNamespace("gplots")) {
       			stop("package 'gplots' required for plotting heat map")
     		}
@@ -305,7 +305,14 @@ optHeatmap <- function(x, dendroClusters = TRUE, barClusters = TRUE, clusterColo
     		} else {
     			trace <- "none"    		
     		} 
-    		
+ 
+    		if(exists("scale", where = plotArgs)){
+    		  scale <- plotArgs$scale
+    		  plotArgs <- plotArgs[-which(names(plotArgs) == "scale")]
+    		} else {
+    		  scale <- "none"    		
+    		} 
+    		   		
     		## Obtain optimal clustering method and number of clusters 		    		
 			topAlg <- topMethod(x)
 			k <-as.numeric(gsub("\\D", "", topAlg))
@@ -323,7 +330,7 @@ optHeatmap <- function(x, dendroClusters = TRUE, barClusters = TRUE, clusterColo
 			}
 			
 			## Choose colors for clusters
-			if(clusterColors == "rainbow"){
+			if(length(clusterColors) == 1 && clusterColors == "rainbow"){
 				colors <- rainbow(k)
 			}else{
 				colors <- clusterColors[1:k]
