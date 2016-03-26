@@ -2,7 +2,7 @@
 
 ## Determine optimal clustering method and number of clusters
 optCluster <- function(obj, nClust, clMethods = "all", countData = FALSE, validation = c("internal", "stability"), hierMethod = "average", 
-		 annotation = NULL, clVerbose = FALSE, rankMethod = "CE", distance = "Spearman", rankVerbose= FALSE, ...) {
+		 annotation = NULL, clVerbose = FALSE, rankMethod = "CE", distance = "Spearman", importance = NULL, rankVerbose= FALSE, ...) {
 
 	is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol     
     isCountData <- all(is.wholenumber(obj))
@@ -26,7 +26,7 @@ optCluster <- function(obj, nClust, clMethods = "all", countData = FALSE, valida
     }
   	
   	if("all" %in% validation) {
-	validation = c("internal", "stability", "biological")
+	validation <- c("internal", "stability", "biological")
     }  	
 	
 	nClustOut <- nClust
@@ -217,10 +217,14 @@ optCluster <- function(obj, nClust, clMethods = "all", countData = FALSE, valida
 		clusterOrder$weights <- RankAggreg.args$weights
 		RankAggreg.args <- RankAggreg.args[-which(names(RankAggreg.args) == "weights")]
 	}
-	
+	## Weights for validation measure lists
+ 	if(is.null(importance)){
+ 	  importance <- rep(1, nrow(clusterOrder$ranks))
+ 	}
+ 	
 	## Perform weighted rank aggregation		
 	optimal.list <- do.call('RankAggreg', c(list(x = clusterOrder$ranks, k = nList, weights = clusterOrder$weights, 
-	method = rankMethod, distance = distance, verbose = rankVerbose), RankAggreg.args))
+	method = rankMethod, distance = distance, importance = importance, verbose = rankVerbose), RankAggreg.args))
         	
 	## Create 'optCluster' class object
 	new("optCluster", inputData = mat, clVal = clVal, ranksWeights = clusterOrder, rankAgg = optimal.list)	
@@ -229,7 +233,7 @@ optCluster <- function(obj, nClust, clMethods = "all", countData = FALSE, valida
 ########## repRankAggreg Function ##########
 
 ## Repeat weighted rank aggregation on "optCluster" object
-repRankAggreg <- function(optObj, rankMethod = "same", distance = "same", rankVerbose = FALSE, ... ){
+repRankAggreg <- function(optObj, rankMethod = "same", distance = "same", importance = NULL, rankVerbose = FALSE, ... ){
 	
 	## Obtain RankAggreg arguments
 	RankAggreg.args <- list(...)
@@ -265,9 +269,14 @@ repRankAggreg <- function(optObj, rankMethod = "same", distance = "same", rankVe
 		RankAggreg.args <- RankAggreg.args[-which(names(RankAggreg.args) == "weights")]
 	}
 	
+	## Weights for validation measure lists
+	if(is.null(importance)){
+	  importance <- rep(1, nrow(clusterOrder$ranks))
+	}
+	
 	## Perform weighted rank aggregation		
 	optimal.list <- do.call('RankAggreg', c(list(x = clusterOrder$ranks, k = nList, weights = clusterOrder$weights, 
-	method = method, distance = distance, verbose = rankVerbose), RankAggreg.args))
+	method = method, distance = distance, importance = importance, verbose = rankVerbose), RankAggreg.args))
 	
 	## Create new 'optCluster' class object
 		new("optCluster", inputData = getDataset(optObj), clVal = getClValid(optObj), ranksWeights = clusterOrder, rankAgg = optimal.list)
@@ -291,7 +300,7 @@ aggregPlot <- function(x, show.average = TRUE, show.legend = TRUE, colR = "red",
 } 
           
 ## Hierarchical Heat Map
-optHeatmap <- function(x, dendroClusters = TRUE, barClusters = TRUE, clusterColors = "rainbow",
+optHeatmap <- function(x, dendroClusters = TRUE, barClusters = FALSE, clusterColors = "rainbow",
 					mapColors = colorRampPalette(c("green", "black", "red"))(256), Colv = FALSE,
 					dendrogram = "row", density.info = "none", ...){
 			if(!requireNamespace("gplots")) {

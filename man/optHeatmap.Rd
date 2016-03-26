@@ -10,7 +10,7 @@
   
 }
 \usage{
-optHeatmap(x, dendroClusters = TRUE, barClusters = TRUE, 
+optHeatmap(x, dendroClusters = TRUE, barClusters = FALSE, 
 			clusterColors = "rainbow", 
 			mapColors = colorRampPalette(c("green", "black", "red"))(256), 
 			Colv = FALSE, dendrogram = "row", density.info = "none", ...)
@@ -34,7 +34,7 @@ optHeatmap(x, dendroClusters = TRUE, barClusters = TRUE,
 	\item{dendrogram}{Character string specifying which dendrogram(s) to display. 
 		Options include: "none", "row", "column", "both".}
 	\item{density.info}{Character string specifying the type of plot to superimpose
-		on the color-key.  Options include: "none", "histogram", "density".}			
+		on the color-key.  Options include: "none", "histogram", "density".}
 	\item{\dots}{Additional plotting parameters from the \code{heatmap.2} function.}  
 }
 
@@ -80,8 +80,8 @@ optHeatmap(x, dendroClusters = TRUE, barClusters = TRUE,
 	## Create a Heat Map Reordering Both Rows and Columns
 	optHeatmap(hier1, Colv = TRUE, dendrogram = "both")
 	
-	## Customized Heat Map Using heatmap.2 Arguments
-	optHeatmap(hier1, barClusters = FALSE, Colv = TRUE, dendrogram = "both", 
+	## Customized Heat Map Using Several heatmap.2 Arguments
+	optHeatmap(hier1, Colv = TRUE, dendrogram = "both", 
 	labRow = "", cexCol = 1.0, keysize = 1)
 
 
