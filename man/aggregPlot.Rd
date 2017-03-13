@@ -37,7 +37,7 @@ aggregPlot(x, show.average = TRUE, show.legend = TRUE, colR = "red", ...)
     
 }
 
-\author{Michael Sekula, Somnath Datta, Susmita Datta}
+%\author{Michael Sekula, Somnath Datta, Susmita Datta}
 
 
 \seealso{
@@ -62,5 +62,3 @@ aggregPlot(x, show.average = TRUE, show.legend = TRUE, colR = "red", ...)
 	
 	}
 }
-\keyword{cluster}
-\keyword{optimize}

@@ -4,10 +4,10 @@ importFrom(mclust, Mclust)
 importFrom(grDevices, colorRampPalette, dev.interactive, rainbow)
 importFrom(graphics, par)
 importFrom(stats, as.dendrogram, as.dist, cor, cutree,
-     dendrapply, dist, ftable)
+     dendrapply, dist, ftable, predict)
 importFrom(utils, capture.output)
 exportClasses(optCluster)
 exportMethods(getDataset, getClValid, methodRanks, scoreRanks, getRankAggreg, 
 	topMethod, measureNames, methodNames, clusterResults, valScores, 
-	optimalScores, print, show, summary)
+	optimalScores, print, show, summary, optAssign)
 export(optCluster, repRankAggreg, valPlot, aggregPlot, optHeatmap)

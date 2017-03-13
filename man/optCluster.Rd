@@ -10,7 +10,8 @@
 }
 
 \usage{
-  optCluster(obj, nClust, clMethods = "all", countData = FALSE,
+  optCluster(obj, nClust, clMethods = c("clara", "diana", "hierarchical", 
+  "kmeans", "model", "pam", "som", "sota"), countData = FALSE,
   validation = c("internal", "stability"), hierMethod = "average",
   annotation = NULL, clVerbose = FALSE, rankMethod = "CE", 
   distance = "Spearman", importance = NULL, rankVerbose = FALSE, ...) 
@@ -18,9 +19,8 @@
 
 \arguments{
   \item{obj}{The dataset to be evaluated as either a data frame, a numeric matrix, or an 
-  	\code{\link[Biobase]{ExpressionSet}} object.  The items to be clustered (e.g. genes)
-  	are the rows and the samples are the columns.  In the case of data frames, 
-  	all columns must be numeric.  }
+  	\code{\link[Biobase]{ExpressionSet}} object.  Items to be clustered must be the rows of
+  	the data.  In the case of data frames, all columns must be numeric.}
   \item{nClust}{A numeric vector providing the range of clusters to be evaluated (e.g. to evaluate 
   	the number of clusters ranging from 2 to 4, input 2:4).
   	A single number can also be provided.}
@@ -28,7 +28,8 @@
     The available algorithms are: "agnes", "clara", "diana", "fanny", \cr "hierarchical", 
     "kmeans", "model", "pam", "som", "sota", "em.nbinom", \cr "da.nbinom", "sa.nbinom", 
     "em.poisson", "da.poisson", "sa.poisson". Any number of selected methods is allowed.  
-    The option "all" can also be used.}
+    The option "all" may also be used but with some caution, see \bold{Clustering Algorithms} 
+    in the `Details' section for more information.}
   \item{countData}{A logical argument, indicating whether the data is count based or not.  Can also be used 
   	in conjuction with the "all" option for the 'clMethods' argument.  If TRUE and 'clMethods' = "all", 
   	all of the clustering algorithms for count data are selected: "em.nbinom", "da.nbinom", "sa.nbinom", 
@@ -55,7 +56,7 @@
   	Selection of only one distance is allowed.}     
   \item{importance}{Vector of weights indicating the importance of each validation measure list.  
     Default of NULL represents equal weights to each validation measure.  See \bold{Weighted Rank Aggregation} 
-    in the 'details' section for more information.}
+    in the `Details' section for more information.}
   \item{rankVerbose}{If TRUE, current rank aggregation results are displayed at each iteration.}
   \item{\dots}{Additional arguments that can be passed to internal functions of \code{clValid} or \code{RankAggreg}:\cr
     Additional \code{clValid} arguments:
@@ -70,6 +71,7 @@
     }
     Additional \code{RankAggreg} arguments:
     \itemize{
+    \item{\code{maxIter} - The maximum number of iterations allowed. Default = 1000}
     \item{\code{k} - Size of top-k list in aggregation.}
     \item{\code{convIN} - Stopping criteria for CE and GA algorithms.  The algorithm converges once the "best" solution does not
     change after convIN iterations.  Default: 7 for CE and 30 for GA.}
@@ -77,7 +79,7 @@
     \item{\code{rho} - For CE algorithm, (rho*N) is the qunatile of candidate list sorted by function values.}
     \item{\code{weight} - For CE algorithm, the learning factor used in the probability update feature.  Default = 0.25}
     \item{\code{popSize} - For GA algorithm population size in each generation. Default = 100}
-    \item{\code{CP} - For GA algorithm, the cross-over probability.  Default = 0.4}
+    \item{\code{CP} - For GA algorithm, the crossover probability.  Default = 0.4}
     \item{\code{MP} - For GA algorithm, the mutation probability.  Default = 0.01}
     }
     }
@@ -97,7 +99,9 @@
   	  	
   	  	\itemize{
   	  	\item Ten clustering algorithms for continuous data are available through the internal function \code{clValid}: 
-  	  	"agnes", "clara", "diana", "fanny", "hierarchical", "kmeans", "model", "pam", "som", and "sota".
+  	  	"agnes", "clara", "diana", "fanny", "hierarchical", "kmeans", "model", "pam", "som", and "sota". \emph{ \bold{NOTE:} Some
+  	  	algorithms (especially Fanny) may have difficulty finding certain numbers of clusters. If warnings or errors are
+  	  	produced, the offending algorithm(s) should be removed from the \code{clMethods} argument.}
 
   		\item Six clustering algorithms for count data are available 
   		through the \pkg{MBCluster.Seq} \cr package: "em.nbinom", "da.nbinom", "sa.nbinom", "em.poisson", "da.poisson", 
@@ -177,7 +181,8 @@
 		  
 		  \item{\bold{Weighted Rank Aggregation:}}{ A list of weights for each validation measure list
 	    can be included using the \code{importance} argument.  The default value of equal weights (NULL) is 
-		  represented by rep(1, length(x)), where x is the character vector of validation measure names.
+		  represented by rep(1, length(x)), where x is the character vector of validation measure names.  This
+		  means each validation measure list has a weight of 1/length(x).
 		  To manually change the weights, the order of the validation measures selected needs to be known.
 		  The order of validation measures used in \code{optCluster} is provided below:
 		  
@@ -232,7 +237,7 @@
     
 }
 
-\author{Michael Sekula, Somnath Datta, Susmita Datta}
+%\author{Michael Sekula, Somnath Datta, Susmita Datta}
 \note{
 
 Prespecifying a list or a logical matrix of genes corresponding to functional classes for biological
@@ -283,14 +288,10 @@ See  \url{http://www.bioconductor.org} for instructions on installing these.
 	## Analysis of Count Data using Internal and Stability Validation Measures
 	count1 <- optCluster(arabid, 2:4, clMethods = "all", countData = TRUE)
 	summary(count1)
+	# Obtain optimal clustering assignment
+	optAssign(count1)
 	
-	 ## Analysis of Count Data using All Validation Measures
-	 if(require("Biobase") && require("annotate") && require("GO.db") && 
-		require("org.At.tair.db")){
-	 count2 <- optCluster(arabid, 2:4, clMethods = "all", countData = TRUE, validation = "all", 
-					annotation = "org.At.tair.db")
-	 summary(count2)	
-	 }
+	
 	
 	## Normalize Data with Respect to Library Size	
 	obj <- t(t(arabid)/colSums(arabid))
@@ -298,26 +299,22 @@ See  \url{http://www.bioconductor.org} for instructions on installing these.
 	## Analysis of Normalized Data using Internal and Stability Validation Measures
 	norm1 <- optCluster(obj, 2:4, clMethods = "all")
 	summary(norm1)
+	# Obtain optimal clustering assignment
+	optAssign(norm1)
+	#Obtain clustering assignment for diana with 2 clusters
+	clusterResults(norm1, "diana", k = 2)$cluster
 	
 	 ## Analysis of Normalized Data using All Validation Measures
 	 if(require("Biobase") && require("annotate") && require("GO.db") && 
 	 	require("org.At.tair.db")){
 	 norm2 <- optCluster(obj, 2:4, clMethods = "all", validation = "all", 
 					annotation = "org.At.tair.db")
-	 summary(norm2)	
+	 summary(norm2)
 	 }
 	
 	## Analysis with Only UPGMA using Internal and Stability Validation Measures
 	hier1 <- optCluster(obj, 2:10, clMethods = "hierarchical")
 	summary(hier1)
-	
- ## Analysis with Only UPGMA using All Validation Measures
-	 if(require("Biobase") && require("annotate") && require("GO.db") && 
-		require("org.At.tair.db")){
-	 hier2 <- optCluster(obj, 2:10, clMethods = "hierarchical", validation = "all", 
-					annotation = "org.At.tair.db")
-	 summary(hier2)	
-	 }
 	
 	}
 }

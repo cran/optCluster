@@ -46,10 +46,35 @@ setMethod("methodNames",signature(object="optCluster"),
 ## clustering results 
 setGeneric("clusterResults", function(object, ...) standardGeneric("clusterResults"))
 setMethod("clusterResults",signature(object="optCluster"),
-          function(object,method=methodNames(object)) {
-            method <- match.arg(method,methodNames(object))
+          function(object,method=methodNames(object),k=NULL) {
+            algName <- match.arg(method,methodNames(object))
             clValObj <- getClValid(object)
-            return(clValObj@clusterObjs[[method]])})
+            res <- clValObj@clusterObjs[[algName]]
+            if(is.null(k)){
+              return(results = res)
+            }else if(length(k) == 1 && k %in% clValObj@nClust){
+              ## Obtain clustering results
+              if(algName %in% c("hierarchical", "agnes", "diana")){
+                res.out <- res
+                den <- as.dendrogram(res.out)
+                assignment <- cutree(res.out,k)		
+              } else if(algName == "som"){
+                res.out <- predict(res[[which(clValObj@nClust == k)]], trainY = object@inputData)
+                assignment <- res.out$unit.classif
+              } else if(algName == "model"){
+                res.out <- res[[which(clValObj@nClust == k)]]
+                assignment <- res.out$classification
+              } else if(algName == "sota"){
+                res.out <-  res[[which(clValObj@nClust == k)]]
+                assignment <- res.out$clust
+              }else{
+                res.out <-res[[which(clValObj@nClust == k)]]
+                assignment <- res.out$cluster
+              }
+            }else{
+              stop(paste(c("'k' must be one of the following:", clValObj@nClust), collapse = " "))
+            }
+            return(list(results = res.out, cluster = assignment))})
 
 ## validation measures 
 setGeneric("valScores", function(object, ...) standardGeneric("valScores"))
@@ -72,6 +97,19 @@ setMethod("optimalScores","optCluster",
             cat("Optimal Scores:\n\n") 
             return(data.frame("Score"=round(best,digits),"Method"=methodNames,"Clusters"=methodNums))
           })
+
+
+## optimal partition assignment
+setGeneric("optAssign", function(object, ...) standardGeneric("optAssign"))
+setMethod("optAssign", signature(object="optCluster"),
+          function(object) {
+            topAlg <- topMethod(object)
+            k <-as.numeric(gsub("\\D", "", topAlg))
+            algName <- as.character(gsub("\\d", "", topAlg))
+            algName <- gsub("-", "", algName)
+            assignment <- clusterResults(object,method=algName,k=k)$cluster
+            return(list(method = topAlg, cluster = assignment))}) 
+
           
 ########### Print, Show, and Summary Methods ##########
 

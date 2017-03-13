@@ -55,7 +55,7 @@ optHeatmap(x, dendroClusters = TRUE, barClusters = FALSE,
 	\code{heatmap.2} function through the \code{optHeatmap} function.
 	}
 
-\author{Michael Sekula, Somnath Datta, Susmita Datta}
+%\author{Michael Sekula, Somnath Datta, Susmita Datta}
 
 \seealso{
 
@@ -86,6 +86,3 @@ optHeatmap(x, dendroClusters = TRUE, barClusters = FALSE,
 
 
 }
-
-\keyword{cluster}
-\keyword{optimize}

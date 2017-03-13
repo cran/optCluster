@@ -43,7 +43,7 @@ valPlot(x, measures = measureNames(x), legend = TRUE,
     
 }
 
-\author{Michael Sekula, Somnath Datta, Susmita Datta}
+%\author{Michael Sekula, Somnath Datta, Susmita Datta}
 
 
 \seealso{
@@ -72,11 +72,8 @@ valPlot(x, measures = measureNames(x), legend = TRUE,
 	## Plots of Internal Validation Measures in a Single Figure
 	par(mfrow = c(2,2))
 	valPlot(norm1, measure = c("Dunn", "Silhouette", "Connectivity"), legend = FALSE)
-	plot(2:4, valScores(norm1, "Dunn")[,,1], type="n", axes=FALSE, xlab = "", ylab = "")
+	plot(0, type="n", axes=FALSE, xlab = "", ylab = "")
 	legend("center", methodNames(norm1), col=1:9, lty=1:9, pch=paste(c(1:9)), 
 			cex=0.8)		
 	}
 }
-
-\keyword{cluster}
-\keyword{optimize}

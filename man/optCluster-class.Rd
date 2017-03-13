@@ -14,6 +14,7 @@
 \alias{clusterResults,optCluster-method}
 \alias{valScores,optCluster-method}
 \alias{optimalScores,optCluster-method}
+\alias{optAssign,optCluster-method}
 
 \alias{getDataset}
 \alias{getClValid}
@@ -26,6 +27,7 @@
 \alias{clusterResults}
 \alias{valScores}
 \alias{optimalScores}
+\alias{optAssign}
 
 \alias{print,optCluster-method}
 \alias{show,optCluster-method}
@@ -60,6 +62,9 @@
 
 \section{Methods}{
   \describe{
+      \item{optAssign}{\code{signature(object = "optCluster")}: Returns 
+      the cluster assignment corresponding to the optimal clustering algorithm
+      and number of clusters.}
     \item{getDataset}{\code{signature(object = "optCluster")}: Returns the
       original dataset as an object of class \code{"matrix"}.}
     \item{getClValid}{\code{signature(object = "optCluster")}: Returns an
@@ -76,15 +81,21 @@
       names of the validation measures used.}      
     \item{methodNames}{\code{signature(object = "optCluster")}: Returns the
       names of the clustering algorithms used.}      
-    \item{clusterResults}{\code{signature(object = "optCluster")}: Returns the
-	  clustering results from the selected clustering method.}
+    \item{clusterResults}{\code{signature(object = "optCluster")}: Returns an
+	  object of the class corresponding to the selected clustering method for each
+	  number of cluster in the analysis.  If provided \code{k},
+	  the object and clustering assignment for the corresponding method and 
+	  number of clusters is returned.}
 	  
 	  Additional arguments:
       \describe{
 			\item{\code{method = methodNames(object)}}{ The clustering
 				algorithm to extract. The selection of only one algorithm 
 				is allowed.}
-      }      
+			\item{\code{k = NULL}}{The number of clusters to extract.  The selection
+			of only one number of clusters is allowed.}
+      }  
+      
     \item{valScores}{\code{signature(object = "optCluster")}: Returns the
 	  scores from the selected validation measure(s).}
 	  
@@ -130,7 +141,7 @@
   Electronic Theses and Dissertations. Paper 2147.
   \url{http://ir.library.louisville.edu/etd/2147}
 }
-\author{Michael Sekula, Somnath Datta, Susmita Datta}
+%\author{Michael Sekula, Somnath Datta, Susmita Datta}
 
 \seealso{
 	
@@ -166,12 +177,21 @@
 	topMethod(norm1)
 	summary(norm1)
 	optimalScores(norm1)
+	optAssign(norm1)
+	
+	## Extract cluster results for kmeans and all numbers of clusters
+	clusterResults(norm1, method = "kmeans")
+	## Extract cluster results for kmeans and 3 clusters only
+	clusterResults(norm1, method = "kmeans", k = 3)
+	
+	## Extract all validation scores
+	valScores(norm1)
+	## Extract validations scores for APN and ADM only
+	valScores(norm1, measures = c("APN", "ADM"))
 	
 	## Extract additional information from slots
 	methodNames(norm1)
-	clusterResults(norm1, "kmeans")
 	measureNames(norm1)
-	valScores(norm1)
 	methodRanks(norm1)
 	scoreRanks(norm1)
 	}

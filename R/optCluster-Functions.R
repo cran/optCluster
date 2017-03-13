@@ -1,7 +1,7 @@
 ########### optCluster Function ###########
 
 ## Determine optimal clustering method and number of clusters
-optCluster <- function(obj, nClust, clMethods = "all", countData = FALSE, validation = c("internal", "stability"), hierMethod = "average", 
+optCluster <- function(obj, nClust, clMethods = c("clara", "diana", "hierarchical", "kmeans", "model", "pam", "som", "sota"), countData = FALSE, validation = c("internal", "stability"), hierMethod = "average",
 		 annotation = NULL, clVerbose = FALSE, rankMethod = "CE", distance = "Spearman", importance = NULL, rankVerbose= FALSE, ...) {
 
 	is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol     

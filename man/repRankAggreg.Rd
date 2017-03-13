@@ -26,10 +26,11 @@
   	can also be directly specified.  Selection of only one distance is allowed.}
   \item{importance}{Vector of weights indicating the importance of each validation measure list.  
     Default of NULL represents equal weights to each validation measure.  See \bold{Weighted Rank Aggregation} 
-    in the details section for more information.}
+    in the `Details' section for more information.}
   \item{rankVerbose}{If TRUE, current rank aggregation results are displayed at each iteration.}
   \item{\dots}{Additional arguments that can be passed to the internal function \code{RankAggreg}:
     \itemize{
+    \item{\code{maxIter} - The maximum number of iterations allowed. Default = 1000}
     \item{\code{k} - Size of top-k list in aggregation.}
     \item{\code{convIN} - Stopping criteria for CE and GA algorithms.  The algorithm converges once the "best" solution does not
     change after convIN iterations.  Default: 7 for CE and 30 for GA.}
@@ -37,7 +38,7 @@
     \item{\code{rho} - For CE algorithm, (rho*N) is the qunatile of candidate list sorted by function values.}
     \item{\code{weight} - For CE algorithm, the learning factor used in the probability update feature.  Default = 0.25}
     \item{\code{popSize} - For GA algorithm population size in each generation. Default = 100}
-    \item{\code{CP} - For GA algorithm, the cross-over probability.  Default = 0.4}
+    \item{\code{CP} - For GA algorithm, the crossover probability.  Default = 0.4}
     \item{\code{MP} - For GA algorithm, the mutation probability.  Default = 0.01}
     }
   }
@@ -50,10 +51,11 @@
 	type of distance measure can also be evaluated using this function, but doing so may affect the final results. \cr
 	
 	\bold{Weighted Rank Aggregation:}{ A list of weights for each validation measure list
-	can be included using the \code{importance} argument.  The default value of equal weights (NULL) is 
-	represented by rep(1, length(x)), where x is the character vector of validation measure names.
-	To manually change the weights, the order of the validation measures selected needs to be known.
-	The order of validation measures used in \code{optCluster} is provided below:
+	    can be included using the \code{importance} argument.  The default value of equal weights (NULL) is 
+		  represented by rep(1, length(x)), where x is the character vector of validation measure names.  This
+		  means each validation measure list has a weight of 1/length(x).
+		  To manually change the weights, the order of the validation measures selected needs to be known.
+		  The order of validation measures used in \code{optCluster} is provided below:
 		  
 	\itemize{
 	\item{When selected, stability measures will ALWAYS be listed first and in the following order: "APN", "AD", "ADM", "FOM".}
@@ -90,7 +92,7 @@
   \url{http://ir.library.louisville.edu/etd/2147}  
 }
 
-\author{Michael Sekula, Somnath Datta, Susmita Datta}
+%\author{Michael Sekula, Somnath Datta, Susmita Datta}
 
 
 \seealso{
@@ -121,5 +123,3 @@
 	
 }
 
-\keyword{cluster}
-\keyword{optimize}
