@@ -1,7 +1,7 @@
 Package: optCluster
 Title: Determine Optimal Clustering Algorithm and Number of Clusters
-Version: 1.1.1
-Date: 2017-3-13
+Version: 1.2.0
+Date: 2019-12-10
 Author: Michael Sekula <michael.sekula@louisville.edu>, 
 	Somnath Datta <somnath.datta@louisville.edu>,
 	and Susmita Datta <susmita.datta@louisville.edu> 
@@ -17,6 +17,6 @@ Collate: optCluster-Classes.R optCluster-Methods.R
         optCluster-Internal.R optCluster-Functions.R
 License: GPL (>= 2)
 NeedsCompilation: no
-Packaged: 2017-03-13 18:17:43 UTC; michaelsekula
+Packaged: 2019-12-10 21:43:59 UTC; michaelsekula
 Repository: CRAN
-Date/Publication: 2017-03-13 21:14:18
+Date/Publication: 2019-12-10 22:40:02 UTC

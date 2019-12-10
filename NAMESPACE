@@ -6,6 +6,7 @@ importFrom(graphics, par)
 importFrom(stats, as.dendrogram, as.dist, cor, cutree,
      dendrapply, dist, ftable, predict)
 importFrom(utils, capture.output)
+importFrom(stats, hclust, kmeans)
 exportClasses(optCluster)
 exportMethods(getDataset, getClValid, methodRanks, scoreRanks, getRankAggreg, 
 	topMethod, measureNames, methodNames, clusterResults, valScores, 

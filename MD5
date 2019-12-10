@@ -1,8 +1,8 @@
-4969be560d22ff71b7d1fc84c136a78d *DESCRIPTION
-143c218d31c20d385f4437b4f39e69ea *NAMESPACE
+7be191fb61e2f9d2d2d82317ee766827 *DESCRIPTION
+749c134f7ecb06926ab53745bed2156d *NAMESPACE
 c8adc248b2462bc84c1082b4da2c8178 *R/optCluster-Classes.R
-a4c55547517a8860245c820240ee1b3c *R/optCluster-Functions.R
-b39341395c4a1a2660f5fe000e9a94dd *R/optCluster-Internal.R
+1feb497735d0fe41ce4c1a868f45d64a *R/optCluster-Functions.R
+29a227c71bcbecdcafe9b949fb273416 *R/optCluster-Internal.R
 f756e532161c5dc2db9d3f6c5f503fad *R/optCluster-Methods.R
 1fed6721d0d2ceb5f042f2639b9d2b7d *data/arabid.rda
 820c5666df2ceb511b1dd982bc567761 *man/aggregPlot.Rd

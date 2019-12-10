@@ -30,12 +30,22 @@ optCluster <- function(obj, nClust, clMethods = c("clara", "diana", "hierarchica
     }  	
 	
 	nClustOut <- nClust
-	switch(class(obj), matrix = mat <- obj, ExpressionSet = mat <- Biobase::exprs(obj), 
-        data.frame = {
-            if (any(!sapply(obj, class) %in% c("numeric", "integer"))) stop("data frame 'obj' contains non-numeric data")
-            mat <- as.matrix(obj)
-        }, stop("argument 'obj' must be a matrix, data.frame, or ExpressionSet object"))	
-		
+	
+	##########################################
+	## Fix to accomodate _R_CLASS_MATRIX_ARRAY (12/10/19)
+	##########################################
+	if(is(obj, "matrix")){
+	  mat <- obj
+	}else{
+	  switch(class(obj), 
+	         ExpressionSet = mat <- Biobase::exprs(obj), 
+	         data.frame = {
+	           if (any(!sapply(obj, class) %in% c("numeric", "integer"))) stop("data frame 'obj' contains non-numeric data")
+	           mat <- as.matrix(obj)
+	         }, 
+	         stop("argument 'obj' must be a matrix, data.frame, or ExpressionSet object"))	
+	}
+
 	addArgs <- list(...)
 	## 'verbose' and 'method' are used in more than one function
 	if(exists(c("verbose"), where = addArgs)){
@@ -113,8 +123,8 @@ optCluster <- function(obj, nClust, clMethods = c("clara", "diana", "hierarchica
 	
 	## Obtain validation measures for clValid clustering algorithms
 	if(length(clMethods) > 0){
-		clVObj <- do.call('clValid',c(list(obj, nClust, clMethods, validation, method = hierMethod, annotation = annotation, verbose = clVerbose,
-				maxitems = maxitems), clValid.args))
+		clVObj <- do.call('clValid2',c(list(obj, nClust, clMethods, validation, method = hierMethod, annotation = annotation, verbose = clVerbose,
+		                                   maxitems = maxitems), clValid.args))
 		if(any(is.na(clVObj@measures))){
 			stop("NA validation measures returned for at least one clustering algorithm \n  Rank aggregation cannot be performed")
 		}
