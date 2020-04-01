@@ -1,10 +1,10 @@
-import(clValid, RankAggreg, methods, cluster, gplots, kohonen,
+import(RankAggreg, methods, cluster, gplots, kohonen,
 	MBCluster.Seq)
-importFrom(mclust, Mclust)
+import(mclust, except = c(map))
 importFrom(grDevices, colorRampPalette, dev.interactive, rainbow)
-importFrom(graphics, par)
+importFrom(graphics, par, axis, legend, lines, matplot)
 importFrom(stats, as.dendrogram, as.dist, cor, cutree,
-     dendrapply, dist, ftable, predict)
+     dendrapply, dist, ftable, predict, xtabs)
 importFrom(utils, capture.output)
 importFrom(stats, hclust, kmeans)
 exportClasses(optCluster)
@@ -12,3 +12,5 @@ exportMethods(getDataset, getClValid, methodRanks, scoreRanks, getRankAggreg,
 	topMethod, measureNames, methodNames, clusterResults, valScores, 
 	optimalScores, print, show, summary, optAssign)
 export(optCluster, repRankAggreg, valPlot, aggregPlot, optHeatmap)
+exportClasses(clValid)
+exportMethods(clusters, clusterMethods, nClusters, measNames, measures, plot, print, show, summary)

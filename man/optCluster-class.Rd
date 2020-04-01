@@ -50,7 +50,7 @@
     	containing the original dataset.}    
     \item{\code{clVal}:}{Object of class \code{"\linkS4class{clValid}"} 
     	containing the clustering results and validation measures from the
-    	internal \code{\link{clValid}} function.}
+    	internal \code{clValid} function.}
     \item{\code{ranksWeights}:}{Object of class \code{"list"} 
     	containing the ordered ranks of clustering algorithms and 
     	the ordered validation scores for each measure.}
@@ -117,6 +117,10 @@
 }
 
 \references{
+  Sekula, M., Datta, S., and Datta, S. (2017). 
+  optCluster: An R package for determining the optimal clustering algorithm. 
+  Bioinformation, 13(3), 101.
+  \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5450252}
 
   Brock, G., Pihur, V., Datta, S. and Datta, S. (2008).
   clValid: An R Package for Cluster Validation.
@@ -136,10 +140,6 @@
   BMC Bioinformatics, 10:62,
   \url{http://www.biomedcentral.com/1471-2105/10/62}.
   
-  Sekula, M. (2015). 
-  optCluster : An R package for Determining the Optimal Clustering Algorithm and Optimal Number of Clusters.
-  Electronic Theses and Dissertations. Paper 2147.
-  \url{http://ir.library.louisville.edu/etd/2147}
 }
 %\author{Michael Sekula, Somnath Datta, Susmita Datta}
 
@@ -149,9 +149,9 @@
 
 
   For a description of the \code{clValid} function, including all available arguments that can be
-  passed to it, see \code{\link{clValid}} in the \pkg{clValid} package.  
+  passed to it, see \code{clValid} in the \pkg{clValid} package.  
   For a desciption of the class \code{"clValid"} including all available methods see 
-  \code{\link{clValid-class}}.
+  \code{clValid-class}.
   
   For a description of the \code{RankAggreg} function, including all available arguments that can be 
   passed to it, see \code{\link{RankAggreg}} in the \pkg{RankAggreg} package. 

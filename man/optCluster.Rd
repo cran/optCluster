@@ -208,6 +208,11 @@
 
 \references{
 
+  Sekula, M., Datta, S., and Datta, S. (2017). 
+  optCluster: An R package for determining the optimal clustering algorithm. 
+  Bioinformation, 13(3), 101.
+  \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5450252}
+
   Brock, G., Pihur, V., Datta, S. and Datta, S. (2008).
   clValid: An R Package for Cluster Validation.
   Journal of Statistical Software 25(4),
@@ -226,11 +231,6 @@
   BMC Bioinformatics, 10:62,
   \url{http://www.biomedcentral.com/1471-2105/10/62}.
 
-  Sekula, M. (2015). 
-  optCluster : An R package for Determining the Optimal Clustering Algorithm and Optimal Number of Clusters.
-  Electronic Theses and Dissertations. Paper 2147.
-  \url{http://ir.library.louisville.edu/etd/2147}
-    
   Si, Y., Liu, P., Li, P., & Brutnell, T. (2014).
   Model-based clustering for RNA-seq data. 
   Bioinformatics 30(2): 197-205.
@@ -254,7 +254,7 @@ See  \url{http://www.bioconductor.org} for instructions on installing these.
 
 \seealso{
   For a description of the \code{clValid} function, including all available arguments that can be
-  passed to it, see \code{\link{clValid}} in the \pkg{clValid} package.  
+  passed to it, see \code{clValid} in the \pkg{clValid} package.  
 
   For a description of the \code{RankAggreg} function, including all available arguments that can be 
   passed to it, see \code{\link{RankAggreg}} in the \pkg{RankAggreg} package. 
@@ -265,14 +265,14 @@ See  \url{http://www.bioconductor.org} for instructions on installing these.
   \code{\link{hclust}} and \code{\link{kmeans}} in package \pkg{stats}, 
   \code{\link[kohonen]{som}} in package \pkg{kohonen}, 
   \code{\link[mclust]{Mclust}} in package \pkg{mclust}, 
-  and \code{\link[clValid]{sota}} in package \pkg{clValid}.
+  and \code{sota} in package \pkg{clValid}.
   
   For details the on the clustering algorithm functions for count data see
   \code{\link[MBCluster.Seq]{Cluster.RNASeq}} in package \pkg{MBCluster.Seq}.
 
   For details on the validation measure functions see
-  \code{\link{BHI}}, \code{\link{BSI}},
-  \code{\link{stability}}, \code{\link{connectivity}} and \code{\link{dunn}} 
+  \code{BHI}, \code{BSI},
+  \code{stability}, \code{connectivity} and \code{dunn} 
   in package \pkg{clValid}
   and \code{\link{silhouette}} in package \pkg{cluster}. 
   

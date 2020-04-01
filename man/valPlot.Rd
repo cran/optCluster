@@ -34,15 +34,6 @@ valPlot(x, measures = measureNames(x), legend = TRUE,
 	average distance between means (ADM), figure of merit (FOM), and connectivity measures 
 	should all be minimized. }
 
-\references{
-  
-  Brock, G., Pihur, V., Datta, S. and Datta, S. (2008).
-  clValid: An R Package for Cluster Validation.
-  Journal of Statistical Software 25(4),
-  \url{http://www.jstatsoft.org/v25/i04}.
-    
-}
-
 %\author{Michael Sekula, Somnath Datta, Susmita Datta}
 
 

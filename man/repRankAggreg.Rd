@@ -76,6 +76,10 @@
 
 }
 \references{
+  Sekula, M., Datta, S., and Datta, S. (2017). 
+  optCluster: An R package for determining the optimal clustering algorithm. 
+  Bioinformation, 13(3), 101.
+  \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5450252}
   
   Pihur, V., Datta, S. and Datta, S. (2007).
   Weighted rank aggregation of cluster validation measures: A Mounte Carlo cross-entropy approach.
@@ -85,11 +89,7 @@
   RankAggreg, an R package for weighted rank aggregation.
   BMC Bioinformatics, 10:62,
   \url{http://www.biomedcentral.com/1471-2105/10/62}.
-  
-  Sekula, M. (2015). 
-  optCluster : An R package for Determining the Optimal Clustering Algorithm and Optimal Number of Clusters.
-  Electronic Theses and Dissertations. Paper 2147.
-  \url{http://ir.library.louisville.edu/etd/2147}  
+
 }
 
 %\author{Michael Sekula, Somnath Datta, Susmita Datta}
