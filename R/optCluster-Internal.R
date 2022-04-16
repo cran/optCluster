@@ -29,8 +29,8 @@ mbCountVal <- function(obj, Normalizer, uniqueTreatment, validation, measNames, 
     			stop("annotation must be specified in order to use biological validation")
   			}
   			if (is.character(annotation)) {
-    			if(!requireNamespace("Biobase") | !requireNamespace("GO.db") | !requireNamespace("annotate")) {
-      				stop("packages 'Biobase', 'GO.db', and 'annotate' required for 2nd type of biological validation \n
+    			if(!requireNamespace("Biobase") | !requireNamespace("annotate")) {
+      				stop("packages 'Biobase' and 'annotate' required for 2nd type of biological validation \n
 					these can be downloaded from Bioconductor (www.bioconductor.org)")
     			}
   			}
@@ -295,8 +295,8 @@ clValid2 <- function(obj, nClust, clMethods="hierarchical", validation="stabilit
     stop("annotation must be specified in order to use biological validation")
   }
   if ("biological"%in%validation & is.character(annotation)) {
-    if(!requireNamespace("Biobase") | !requireNamespace("GO.db") | !requireNamespace("annotate")) {
-      stop("packages 'Biobase', 'GO.db', and 'annotate' required for 2nd type of biological validation \n
+    if(!requireNamespace("Biobase") | !requireNamespace("annotate")) {
+      stop("packages 'Biobase' and 'annotate' required for 2nd type of biological validation \n
            these can be downloaded from Bioconductor (www.bioconductor.org)")
     }
     }

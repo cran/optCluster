@@ -216,7 +216,7 @@
   Brock, G., Pihur, V., Datta, S. and Datta, S. (2008).
   clValid: An R Package for Cluster Validation.
   Journal of Statistical Software 25(4),
-  \url{http://www.jstatsoft.org/v25/i04}.
+  \url{https://www.jstatsoft.org/v25/i04}.
   
   Datta, S. and Datta, S. (2003).
   Comparisons and validation of statistical clustering techniques for microarray gene expression data.
@@ -229,7 +229,7 @@
   Pihur, V., Datta, S. and Datta, S. (2009).
   RankAggreg, an R package for weighted rank aggregation.
   BMC Bioinformatics, 10:62,
-  \url{http://www.biomedcentral.com/1471-2105/10/62}.
+  \url{https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-10-62}.
 
   Si, Y., Liu, P., Li, P., & Brutnell, T. (2014).
   Model-based clustering for RNA-seq data. 
@@ -304,17 +304,27 @@ See  \url{http://www.bioconductor.org} for instructions on installing these.
 	#Obtain clustering assignment for diana with 2 clusters
 	clusterResults(norm1, "diana", k = 2)$cluster
 	
+	## Analysis with Only UPGMA using Internal and Stability Validation Measures
+	hier1 <- optCluster(obj, 2:10, clMethods = "hierarchical")
+	summary(hier1)
+	
 	 ## Analysis of Normalized Data using All Validation Measures
-	 if(require("Biobase") && require("annotate") && require("GO.db") && 
-	 	require("org.At.tair.db")){
+	 ## Note: These lines of code require the following Bioconductor 
+	 ## packages for the biological validation measures:
+	 ## "Biobase", "annotate", "GO.db", and "org.At.tair.db".
+	 ## If all of these packages are installed, then set
+	 ## allBioconductorPackagesInstalled = TRUE
+	 
+	 allBioconductorPackagesInstalled = FALSE
+	 if(allBioconductorPackagesInstalled){
+	 require("Biobase")
+	 require("annotate")
+	 require("GO.db")
+	 require("org.At.tair.db")
 	 norm2 <- optCluster(obj, 2:4, clMethods = "all", validation = "all", 
 					annotation = "org.At.tair.db")
 	 summary(norm2)
 	 }
-	
-	## Analysis with Only UPGMA using Internal and Stability Validation Measures
-	hier1 <- optCluster(obj, 2:10, clMethods = "hierarchical")
-	summary(hier1)
 	
 	}
 }

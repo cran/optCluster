@@ -229,8 +229,8 @@ stability <- function(mat, Dist=NULL, del, cluster, clusterDel, method="euclidea
   dij <- matrix(rep(NA,nc1*nc2),nc1,nc2)
   
   if (is.null(Dist)) matDist <- as.matrix(dist(mat, method=method))
-  if (class(Dist)=="dist") matDist <- as.matrix(Dist)
-  if (class(Dist)=="matrix") matDist <- Dist
+  if (is(Dist,"dist")) matDist <- as.matrix(Dist)
+  if (is(Dist,"matrix")) matDist <- Dist
   
   ## measure ADM
   ## calculate a ncxnc matrix of distance-average in the two collection of nc clusters
@@ -296,7 +296,7 @@ stability <- function(mat, Dist=NULL, del, cluster, clusterDel, method="euclidea
 mysilhouette <- function(distance=NULL, clusters, Data=NULL, method="euclidean"){
   
   if (is.null(distance)) distance <- as.matrix(dist(Data, method=method))
-  if (class(distance)=="dist") distance <- as.matrix(distance)
+  if (is(distance,"dist")) distance <- as.matrix(distance)
   dista <- apply(distance,2,function(x) tapply(x, clusters, function(x) na.rm=TRUE))
   nc <- ncol(dista); nr <- nrow(dista);
   a <- dista[matrix(c(clusters,1:nc),ncol=2,nrow=nc)]
@@ -317,7 +317,7 @@ connectivity <- function(distance=NULL, clusters, Data=NULL, neighbSize=10, meth
   
   if (is.null(distance) & is.null(Data)) stop("One of 'distance' or 'Data' is required")
   if (is.null(distance)) distance <- as.matrix(dist(Data, method=method))
-  if (class(distance)=="dist") distance <- as.matrix(distance)
+  if (is(distance,"dist")) distance <- as.matrix(distance)
   nearest <- apply(distance,2,function(x) sort(x,ind=TRUE)$ix[2:(neighbSize+1)])
   nr <- nrow(nearest);nc <- ncol(nearest)
   same <- matrix(clusters,nrow=nr,ncol=nc,byrow=TRUE)!=matrix(clusters[nearest],nrow=nr,ncol=nc)
@@ -336,7 +336,7 @@ dunn <- function(distance=NULL, clusters, Data=NULL, method="euclidean"){
   
   if (is.null(distance) & is.null(Data)) stop("One of 'distance' or 'Data' is required")
   if (is.null(distance)) distance <- as.matrix(dist(Data, method=method))
-  if (class(distance)=="dist") distance <- as.matrix(distance)
+  if (is(distance,"dist")) distance <- as.matrix(distance)
   nc <- max(clusters)
   interClust <- matrix(NA, nc, nc)
   intraClust <- rep(NA, nc)

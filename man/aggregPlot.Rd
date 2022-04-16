@@ -33,7 +33,7 @@ aggregPlot(x, show.average = TRUE, show.legend = TRUE, colR = "red", ...)
   Pihur, V., Datta, S. and Datta, S. (2009).
   RankAggreg, an R package for weighted rank aggregation.
   BMC Bioinformatics, 10:62,
-  \url{http://www.biomedcentral.com/1471-2105/10/62}.
+  \url{https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-10-62}.
     
 }
 

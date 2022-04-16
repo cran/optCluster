@@ -125,7 +125,7 @@
   Brock, G., Pihur, V., Datta, S. and Datta, S. (2008).
   clValid: An R Package for Cluster Validation.
   Journal of Statistical Software 25(4),
-  \url{http://www.jstatsoft.org/v25/i04}.
+  \url{https://www.jstatsoft.org/v25/i04}.
   
   Datta, S. and Datta, S. (2003).
   Comparisons and validation of statistical clustering techniques for microarray gene expression data.
@@ -138,7 +138,7 @@
   Pihur, V., Datta, S. and Datta, S. (2009).
   RankAggreg, an R package for weighted rank aggregation.
   BMC Bioinformatics, 10:62,
-  \url{http://www.biomedcentral.com/1471-2105/10/62}.
+  \url{https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-10-62}.
   
 }
 %\author{Michael Sekula, Somnath Datta, Susmita Datta}
